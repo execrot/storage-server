@@ -113,19 +113,6 @@ class App_Service_Storage
     }
 
     /**
-     * @param int $from
-     * @param int $count
-     *
-     * @return App_Model_File[]
-     */
-    public function getList($from = 0, $count = 10)
-    {
-        return App_Model_File::fetchAll([
-            'user' => (string)self::$_user->id
-        ], null, $count, $from);
-    }
-
-    /**
      * @param App_Model_File $file
      *
      * @return bool

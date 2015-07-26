@@ -27,7 +27,7 @@ class FileController extends Default_Controller_Auth
      */
     public function uploadAction()
     {
-        if (!count($_FILES['files'])) {
+        if (empty($_FILES['files'])) {
             throw new App_Exception_FilesWasNotUploaded();
         }
 
@@ -60,12 +60,11 @@ class FileController extends Default_Controller_Auth
                 ];
             }
 
-            $results[] = [
-                'success' => true,
-                'info' => App_Map_File::execute(
-                    $this->storage->save($file)
-                )
-            ];
+            $results[] = App_Map_File::execute(
+                $this->storage->save($file),
+                'upload',
+                ['success' => true]
+            );
         }
 
         $this->content = $results;
@@ -79,9 +78,11 @@ class FileController extends Default_Controller_Auth
     public function listAction()
     {
         $this->content = App_Map_File::execute(
-            $this->storage->getList(
-                $this->getParam('from'),
-                $this->getParam('to')
+            App_Model_File::fetchAll(
+                ['user' => (string)$this->user->id],
+                null,
+                $this->getParam('count'),
+                $this->getParam('from')
             )
         );
     }
@@ -95,6 +96,7 @@ class FileController extends Default_Controller_Auth
         $this->content = [];
 
         foreach ($this->getParam('ids', []) as $id) {
+
             $file = App_Model_File::fetchOne([
                 'user' => (string)$this->user->id,
                 'identity' => $id
@@ -114,7 +116,7 @@ class FileController extends Default_Controller_Auth
             $file = App_Model_File::fetchAll([
                 'user' => (string)$this->user->id,
                 'name' => new MongoRegex('/' . $this->getParam('query') . '/')
-            ])
+            ], null, $this->getParam('count', 10), $this->getParam('from', 0))
         );
     }
 
@@ -128,8 +130,8 @@ class FileController extends Default_Controller_Auth
     public function deleteAction()
     {
         $files = App_Model_File::fetchAll([
-            //'user' => (string)$this->user->id,
-            //'identity' => ['$in' => $this->getParam('ids')]
+            'user' => (string)$this->user->id,
+            'identity' => ['$in' => $this->getParam('ids')]
         ]);
 
         foreach ($files as $file) {
