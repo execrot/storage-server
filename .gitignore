@@ -1,0 +1,4 @@
+application/configs/application.ini
+composer.lock
+vendor
+www/storage
