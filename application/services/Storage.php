@@ -142,8 +142,6 @@ class App_Service_Storage
 
             $folderRelativePath = $this->_getRelativeFolderPath($file->identity);
 
-            echo $folderRelativePath."\n";
-
             $path = implode('/', [
                 self::$_config['path'],
                 $folderRelativePath
@@ -152,7 +150,6 @@ class App_Service_Storage
             $count = count(explode('/', $folderRelativePath));
 
             for ($i = $count - 1; $i > -1; $i--) {
-                echo $path . "\n";
                 rmdir($path);
                 $path = dirname($path);
             }
