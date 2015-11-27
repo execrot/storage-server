@@ -134,11 +134,15 @@ class App_Service_Storage
                 throw new App_Exception_FileIsNotWritable($filePath);
             }
             $res = (bool)unlink($filePath);
+
+            $file->delete();
         }
 
         try {
 
             $folderRelativePath = $this->_getRelativeFolderPath($file->identity);
+
+            echo $folderRelativePath."\n";
 
             $path = implode('/', [
                 self::$_config['path'],
@@ -148,11 +152,10 @@ class App_Service_Storage
             $count = count(explode('/', $folderRelativePath));
 
             for ($i = $count - 1; $i > -1; $i--) {
+                echo $path . "\n";
                 rmdir($path);
                 $path = dirname($path);
             }
-
-            $file->delete();
         }
         catch (\Exception $e) {}
 
