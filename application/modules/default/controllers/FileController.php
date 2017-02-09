@@ -88,6 +88,18 @@ class FileController extends Default_Controller_Auth
     }
 
     /**
+     * Total file count
+     */
+    public function countTotalAction()
+    {
+        $this->content = [
+            'count' => App_Model_File::getCount([
+                'user' => (string)$this->user->id
+            ])
+        ];
+    }
+
+    /**
      * Info
      *  (array)ids
      */
