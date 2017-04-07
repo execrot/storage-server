@@ -64,7 +64,7 @@ class FileController extends Default_Controller_Auth
                 $this->storage->save($file),
                 'upload',
                 ['success' => true]
-            );
+            )->toArray();
         }
 
         $this->content = $results;
@@ -84,7 +84,7 @@ class FileController extends Default_Controller_Auth
                 $this->getParam('count'),
                 $this->getParam('from')
             )
-        );
+        )->toArray();
     }
 
     /**
@@ -93,7 +93,7 @@ class FileController extends Default_Controller_Auth
     public function countTotalAction()
     {
         $this->content = [
-            'count' => App_Model_File::getCount([
+            'count' => App_Model_File::count([
                 'user' => (string)$this->user->id
             ])
         ];
@@ -114,7 +114,7 @@ class FileController extends Default_Controller_Auth
                 'identity' => $id
             ]);
 
-            $this->content[] = App_Map_File::execute($file, 'search');
+            $this->content[] = App_Map_File::execute($file, 'search')->toArray();
         }
     }
 
@@ -129,7 +129,7 @@ class FileController extends Default_Controller_Auth
                 'user' => (string)$this->user->id,
                 'name' => new MongoRegex('/' . $this->getParam('query') . '/')
             ], null, $this->getParam('count', 10), $this->getParam('from', 0))
-        );
+        )->toArray();
     }
 
     /**

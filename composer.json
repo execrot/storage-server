@@ -6,9 +6,12 @@
       "email": "execrot@gmail.com"
     }
   ],
+  "repositories": [
+    {"type": "git", "url": "https://github.com/execrot/mongostar7.git"}
+  ],
   "require": {
     "php" : ">=5.4",
     "zendframework/zendframework1": "1.12.*",
-    "execrot/mongostar":            "dev-master"
+    "mongostar/php7":               "dev-master"
   }
 }

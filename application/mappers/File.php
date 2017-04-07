@@ -1,11 +1,11 @@
 <?php
 
-class App_Map_File extends Mongostar_Map_Instance
+class App_Map_File extends \MongoStar\Map
 {
     /**
      * @return array
      */
-    public function rulesCommon()
+    public function common()
     {
         return [
             'identity' => 'identity',
@@ -16,7 +16,7 @@ class App_Map_File extends Mongostar_Map_Instance
         ];
     }
 
-    public function rulesUpload()
+    public function upload()
     {
         return [
             'identity' => 'identity',
@@ -31,7 +31,7 @@ class App_Map_File extends Mongostar_Map_Instance
     /**
      * @return array
      */
-    public function rulesSearch()
+    public function search()
     {
         return [
             'identity' => 'identity',
@@ -43,15 +43,14 @@ class App_Map_File extends Mongostar_Map_Instance
     }
 
     /**
-     * @param App_Model_File $file
      * @return string
      *
      * @throws App_Exception_Forbidden
      */
-    public function getUrl(App_Model_File $file)
+    public function getUrl()
     {
         $storage = new App_Service_Storage();
-        return $storage->getUrl($file);
+        return $storage->getUrl($this->getRow());
     }
 
     /**
@@ -60,8 +59,8 @@ class App_Map_File extends Mongostar_Map_Instance
      */
     public function getSuccess($file)
     {
-        if (!empty($this->_initialData['success'])) {
-            return $this->_initialData['success'];
+        if (!empty($this->getUserData()['success'])) {
+            return $this->getUserData()['success'];
         }
 
         return false;

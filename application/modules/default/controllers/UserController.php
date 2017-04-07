@@ -14,12 +14,12 @@ class UserController extends Default_Controller_Base
         }
 
         $user->addToken();
-        $this->content->user = App_Map_User::execute($user);
+        $this->content->user = App_Map_User::execute($user)->toArray();
     }
 
     public function registerAction()
     {
-        $exists = App_Model_User::getCount([
+        $exists = App_Model_User::count([
             'email' => $this->getParam('email')
         ]);
 
@@ -27,7 +27,9 @@ class UserController extends Default_Controller_Base
             throw new App_Exception_UserAlreadyExists();
         }
 
-        $user = new App_Model_User([
+        $user = new App_Model_User();
+
+        $user->popuplate([
             'email' => $this->getParam('email'),
             'password' => $this->getParam('password'),
             'registered' => time(),

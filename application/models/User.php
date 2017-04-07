@@ -1,7 +1,9 @@
 <?php
 
 /**
- * @property MongoId    $id
+ * @collection User
+ *
+ * @property string     $id
  * @property string     $email
  * @property string     $password
  * @property array      $tokens
@@ -11,7 +13,7 @@
  * @method static App_Model_User|null fetchOne(array $cond = null, array $sort = null)
  * @method static App_Model_User fetchObject(array $cond = null, array $sort = null)
  */
-class App_Model_User extends Mongostar_Model
+class App_Model_User extends \MongoStar\Model
 {
     /**
      * @param string $email
@@ -19,7 +21,7 @@ class App_Model_User extends Mongostar_Model
      */
     public static function isEmailExists($email)
     {
-        return (bool)self::getCount([
+        return (bool)self::count([
             'email' => $email
         ]);
     }
