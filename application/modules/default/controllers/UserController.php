@@ -29,7 +29,7 @@ class UserController extends Default_Controller_Base
 
         $user = new App_Model_User();
 
-        $user->popuplate([
+        $user->populate([
             'email' => $this->getParam('email'),
             'password' => $this->getParam('password'),
             'registered' => time(),

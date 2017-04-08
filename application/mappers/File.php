@@ -5,7 +5,7 @@ class App_Map_File extends \MongoStar\Map
     /**
      * @return array
      */
-    public function common()
+    public function common () : array
     {
         return [
             'identity' => 'identity',
@@ -16,7 +16,7 @@ class App_Map_File extends \MongoStar\Map
         ];
     }
 
-    public function upload()
+    public function upload() : array
     {
         return [
             'identity' => 'identity',
@@ -31,7 +31,7 @@ class App_Map_File extends \MongoStar\Map
     /**
      * @return array
      */
-    public function search()
+    public function search() : array
     {
         return [
             'identity' => 'identity',

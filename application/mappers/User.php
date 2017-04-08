@@ -2,7 +2,10 @@
 
 class App_Map_User extends \MongoStar\Map
 {
-    public function common()
+    /**
+     * @return array
+     */
+    public function common () : array
     {
         return [
             'id' => 'id',

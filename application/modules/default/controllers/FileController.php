@@ -77,14 +77,14 @@ class FileController extends Default_Controller_Auth
      */
     public function listAction()
     {
-        $this->content = App_Map_File::execute(
-            App_Model_File::fetchAll(
-                ['user' => (string)$this->user->id],
-                null,
-                $this->getParam('count'),
-                $this->getParam('from')
-            )
-        )->toArray();
+        $files = App_Model_File::fetchAll(
+            ['user' => (string)$this->user->id],
+            [],
+            $this->getParam('count'),
+            $this->getParam('from')
+        );
+
+        $this->content = App_Map_File::execute($files)->toArray();
     }
 
     /**
@@ -128,7 +128,7 @@ class FileController extends Default_Controller_Auth
             $file = App_Model_File::fetchAll([
                 'user' => (string)$this->user->id,
                 'name' => new MongoRegex('/' . $this->getParam('query') . '/')
-            ], null, $this->getParam('count', 10), $this->getParam('from', 0))
+            ], [], $this->getParam('count', 10), $this->getParam('from', 0))
         )->toArray();
     }
 

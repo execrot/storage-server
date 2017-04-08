@@ -6,7 +6,7 @@
  * @property string     $id
  * @property string     $name
  * @property string     $type
- * @property string     $size
+ * @property int        $size
  * @property string     $ext
  * @property string     $identity
  * @property string     $user
