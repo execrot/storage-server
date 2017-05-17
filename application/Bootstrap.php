@@ -13,7 +13,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
      * @return void
      */
     protected function _initConfig()
-    {
+    {	
         Zend_Registry::set('config', $this->getOptions());
     }
 
@@ -81,7 +81,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     protected function _initDb()
     {
         $config = Zend_Registry::get('config');
-        Mongostar_Model::setConfig($config['db']);
+	$config['db']['servers'] = [[
+		'host' => $config['db']['host'],
+		'port' => $config['db']['port'],
+	]];
+        \MongoStar\Config::setConfig($config['db']);
     }
 
     /**

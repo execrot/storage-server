@@ -1,8 +1,8 @@
 <?php
 
-class App_Map_User extends Mongostar_Map_Instance
+class App_Map_User extends \MongoStar\Map
 {
-    public function rulesCommon()
+    public function common() : array
     {
         return [
             'id' => 'id',

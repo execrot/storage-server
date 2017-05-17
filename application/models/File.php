@@ -1,7 +1,9 @@
 <?php
 
 /**
- * @property MongoId    $id
+ * @collection file
+ *
+ * @property string     $id
  * @property string     $name
  * @property string     $type
  * @property string     $size
@@ -13,4 +15,4 @@
  * @method static App_Model_File|null fetchOne(array $cond = null, array $sort = null)
  * @method static App_Model_File fetchObject(array $cond = null, array $sort = null)
  */
-class App_Model_File extends Mongostar_Model{}
+class App_Model_File extends \MongoStar\Model {}

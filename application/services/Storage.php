@@ -76,21 +76,23 @@ class App_Service_Storage
             copy($file['tmpName'], $newFilePath);
             chmod($newFilePath, 0777);
 
-            $file = new App_Model_File(array(
+            $fileModel = new App_Model_File();
+            $fileModel->populate([
                 'name' => $file['name'],
                 'type' => $file['type'],
                 'size' => $file['size'],
                 'ext'  => $ext,
                 'identity' => $identifier,
                 'user' => (string)self::$_user->id
-            ));
-            $file->save();
+            ]);
+
+            $fileModel->save();
         }
         catch(\Exception $e) {
             throw new App_Exception_UnableToCopyFile($e->getMessage());
         }
 
-        return $file;
+        return $fileModel;
     }
 
     /**
@@ -135,7 +137,7 @@ class App_Service_Storage
             }
             $res = (bool)unlink($filePath);
 
-            $file->delete();
+            $file->remove();
         }
 
         try {
