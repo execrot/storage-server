@@ -81,7 +81,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     protected function _initDb()
     {
         $config = Zend_Registry::get('config');
-        \MongoStar\Config::setConfig($config['db']);
+        \MongoStar\Config::setConfig($config['mongostar']);
     }
 
     /**
