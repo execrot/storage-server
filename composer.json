@@ -12,6 +12,6 @@
   "require": {
     "php" : ">=5.4",
     "zendframework/zendframework1": "1.12.*",
-    "mongostar/php7":               "dev-master"
+    "mongostar/php7":               "dev-php-mondodb1.1-fix"
   }
 }
